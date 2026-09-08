@@ -1,6 +1,9 @@
 class Solution {
     public int countCommas(int n) {
-        if (n < 1000) return 0;
-        return n - 1000 + 1;
+        long count = 0;
+        for (long power = 1000; power <= n; power *= 1000) {
+            count += n - power + 1;
+        }
+        return (int)count;
     }
 }
