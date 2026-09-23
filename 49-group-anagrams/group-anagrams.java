@@ -7,23 +7,14 @@ class Solution {
 
         for (String s : strs) {
 
-            int[] freq = new int[26];
+            char[] chars = s.toCharArray();
 
-            for (char c : s.toCharArray()) {
-                freq[c - 'a']++;
-            }
+            Arrays.sort(chars);
 
-            StringBuilder key = new StringBuilder();
+            String key = new String(chars);
 
-            for (int count : freq) {
-                key.append(count).append('#');
-            }
-
-            if (!map.containsKey(key.toString())) {
-                map.put(key.toString(), new ArrayList<>());
-            }
-
-            map.get(key.toString()).add(s);
+            map.computeIfAbsent(key, k -> new ArrayList<>())
+               .add(s);
         }
 
         return new ArrayList<>(map.values());
