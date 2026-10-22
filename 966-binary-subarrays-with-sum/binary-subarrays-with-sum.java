@@ -1,20 +1,29 @@
 class Solution {
     public int numSubarraysWithSum(int[] nums, int goal) {
-        Map<Integer, Integer> map = new HashMap<>();
+        return subSum(nums,goal)-subSum(nums,goal-1);
+}
 
-        map.put(0, 1);
 
-        int sum = 0;
-        int count = 0;
+private static int subSum(int [] nums,int goal){
+    int right=0;
+    int left=0;
+    int sum=0;
+    int count=0;
 
-        for (int num : nums) {
-            sum += num;
+    if(goal<0){
+        return 0;
+    }
+    while(right<nums.length){
+        sum=sum+nums[right];
 
-            count += map.getOrDefault(sum - goal, 0);
-
-            map.put(sum, map.getOrDefault(sum, 0) + 1);
+        while(sum>goal){
+            sum=sum-nums[left];
+            left++;
         }
 
-        return count;
+        count =count+right-left+1;
+        right++;
+    }
+    return count;
     }
 }
