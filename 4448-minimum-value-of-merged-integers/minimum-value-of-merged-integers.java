@@ -3,9 +3,14 @@ class Solution {
         int ans=Integer.MAX_VALUE;
 
         for(int i=0;i<nums.length;i+=2){
-            int currnum=Integer.parseInt(String.valueOf(nums[i])+String.valueOf(nums[i+1]));
-
-            ans=Math.min(ans,currnum);
+            int currsum=nums[i];
+            int temp=nums[i+1];
+            while(temp>0){
+                currsum=currsum*10;
+                temp=temp/10;
+            }
+            currsum=currsum+nums[i+1];
+            ans=Math.min(ans,currsum);
         }
 
         return ans;
