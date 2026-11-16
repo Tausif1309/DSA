@@ -1,18 +1,16 @@
 class Solution {
     public boolean containsNearbyDuplicate(int[] nums, int k) {
-        HashSet<Integer> set=new HashSet<>();
+        if(k==0){
+            return false;
+        }
+        HashMap<Integer,Integer> map=new HashMap<>();
 
         for(int i=0;i<nums.length;i++){
-
-            if(set.contains(nums[i])){
+            if(map.containsKey(nums[i]) && Math.abs(map.get(nums[i])-i )<=k){
                 return true;
             }
 
-            set.add(nums[i]);
-
-            if(set.size()>k){
-                set.remove(nums[i-k]);
-            }
+            map.put(nums[i],i);
         }
 
         return false;
